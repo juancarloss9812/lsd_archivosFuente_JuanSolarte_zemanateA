@@ -1,0 +1,6 @@
+Hamburguesa de Tipo Pequeño: 1
+Hamburguesa de Tipo Mediano: 0
+Hamburguesa de Tipo Grande: 0
+Costo sin IVA pedido: 4200.0
+IVA pedido: 210.0
+Costo con IVA pedido : 4410.0
