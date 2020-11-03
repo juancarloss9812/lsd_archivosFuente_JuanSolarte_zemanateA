@@ -1,5 +1,6 @@
 package administrador.vistas;
 
+import administrador.sop_rmi.GestionFacturasImpl;
 import servidorDeNotificaciones.vistas.*;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -186,8 +187,8 @@ public class GUIAdministrador extends javax.swing.JFrame {
         DatosEmpresas objEmpresa;
         jpanelconexion.setVisible(false);
         javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido NOTIFICACIONES");
-        vistaNotificacion objNotificar = new vistaNotificacion();
-        NotificacionImpl objRemotoNotificaciones = new NotificacionImpl(objNotificar);
+        vistaAdmin objNotificar = new vistaAdmin();
+        GestionFacturasImpl objRemotoNotificaciones = new GestionFacturasImpl(objNotificar);
 
         try {
             UtilidadesRegistroS.arrancarNS(Integer.parseInt(jtextfieldpuerto.getText()));

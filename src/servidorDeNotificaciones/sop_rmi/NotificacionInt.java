@@ -15,5 +15,5 @@ import java.rmi.RemoteException;
  */
 public interface NotificacionInt extends Remote {
 
-    public void notificarRegistro(Pedido objNotificacion) throws RemoteException;
+    public void notificarRegistro(Pedido objNotificacion) throws RemoteException; 
 }
