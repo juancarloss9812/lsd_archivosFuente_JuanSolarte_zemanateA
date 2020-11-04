@@ -5,21 +5,16 @@
  */
 package servidorDePedidos.sop_rmi;
 
+import administrador.sop_rmi.GestionFacturasInt;
 import servidorDePedidos.dto.DatosEmpresas;
 import servidorDePedidos.dto.Pedido;
 import servidorDePedidos.dto.Factura;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import cliente.utilidades.UtilidadesRegistroC;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import servidorDeNotificaciones.dto.HamburguesaNotificacionDTO;
 import servidorDeNotificaciones.sop_rmi.NotificacionInt;
+import servidorDePedidos.DAO.Ficheros;
 
 /**
  *
@@ -27,10 +22,13 @@ import servidorDeNotificaciones.sop_rmi.NotificacionInt;
  */
 public class GestionPedidosImpl extends UnicastRemoteObject implements GestionPedidosInt {
 
+    private GestionFacturasInt objAdmin;
     private NotificacionInt objReferenciaRemotaNotificacion;
+    private final Ficheros objarchivo;
 
     public GestionPedidosImpl() throws RemoteException {
         super();
+        objarchivo = new Ficheros();
     }
 
     @Override
@@ -54,85 +52,32 @@ public class GestionPedidosImpl extends UnicastRemoteObject implements GestionPe
     @Override
     public DatosEmpresas enviarDatosEmpresa() throws RemoteException {
 
-        DatosEmpresas objEmpresa = new DatosEmpresas();
-        String txt = "";
-        try {
-            File archivo = new File("D:\\Ingenieria de Sistemas\\VII SEMESTRE\\Lab Sistemas Distribuidos\\sd_rmi_archivos_fuente_SolarteJ_ZemanateA\\src\\servidorDePedidos\\DAO\\DatosEmpresa.txt");
-            FileReader fr = new FileReader(archivo);
-            BufferedReader bf = new BufferedReader(fr);
-            String temp = "";
-            String bfRead;
-
-            bfRead = bf.readLine();
-            objEmpresa.setNombre(bfRead);
-            bfRead = bf.readLine();
-            objEmpresa.setNit(Integer.parseInt(bfRead));
-            bfRead = bf.readLine();
-            objEmpresa.setValorIngredienteExtra(Integer.parseInt(bfRead));
-            bfRead = bf.readLine();
-            objEmpresa.setValorTipoHamburguesaP(Integer.parseInt(bfRead));
-            bfRead = bf.readLine();
-            objEmpresa.setValorTipoHamburguesaM(Integer.parseInt(bfRead));
-            bfRead = bf.readLine();
-            objEmpresa.setValorTipoHamburguesaG(Integer.parseInt(bfRead));
-
-            while ((bfRead = bf.readLine()) != null) {
-
-                System.out.println("" + bfRead);
-                temp = temp + bfRead; //guardadndo el texto del archivo
-            }
-            txt = temp;
-            System.out.println("texto del txt : " + txt);
-
-            bf.close();
-
-        } catch (Exception e) {
-            return null;
-        }
+        DatosEmpresas objEmpresa;
+        objEmpresa = objarchivo.darDatosEmpresa();
         return objEmpresa;
     }
 
     @Override
     public boolean registrarFacturaSistema(Factura objFactura) throws RemoteException {
-
-        int numFactura = 0;
-        String ruta = "D:\\Ingenieria de Sistemas\\VII SEMESTRE\\Lab Sistemas Distribuidos\\sd_rmi_archivos_fuente_SolarteJ_ZemanateA\\src\\servidorDePedidos\\DAO\\Facturas\\factura";
-        numFactura = darNumFactura(ruta);
-        String hambuTipoP = "Hamburguesa de Tipo Pequeño: ";
-        String hambuTipoM = "\nHamburguesa de Tipo Mediano: ";
-        String hambuTipoG = "\nHamburguesa de Tipo Grande: ";
-        String costoS = "\nCosto sin IVA pedido: ";
-        String costoI = "\nIVA pedido: ";
-        String costoT = "\nCosto con IVA pedido : ";
-        ruta = ruta + numFactura + ".txt";
-        FileWriter archivo = null;
-        try {
-            archivo = new FileWriter(ruta);
-
-            archivo.write(hambuTipoP + objFactura.getCantidad_Ham_pequeno()
-                    + hambuTipoM + objFactura.getCantidad_Ham_mediana()
-                    + hambuTipoG + objFactura.getCantidad_Ham_grande()
-                    + costoS + objFactura.getCosto_SIN_IVA()
-                    + costoI + objFactura.getValor_IVA_pedido()
-                    + costoT + objFactura.getCosto_CON_IVA());
-            archivo.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(GestionPedidosImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+        boolean bandera =false;
+        bandera=objarchivo.escrbirFactura(objFactura);
+        if(objAdmin != null){
+            notificarAdmin();
         }
+        return bandera;
+    }
 
+    @Override
+    public boolean registrarAdmin(GestionFacturasInt admin) throws RemoteException {
+        System.out.println("Invocando al método registrar admin desde el servidor");
+        objAdmin = admin;
         return true;
     }
 
-    public int darNumFactura(String ruta) {
-        int numFicheros = 0;
-        File f = new File(ruta);
-        File[] listFiles = f.listFiles();
-        for (File file : listFiles) {
-            numFicheros++;
-        }
-        return numFicheros;
+    private void notificarAdmin() throws RemoteException {
+        System.out.println("Invocando al método notificar admin desde el servidor");
+                objAdmin.NotificarFactura();//el servidor hace el callback    
     }
 
+   
 }

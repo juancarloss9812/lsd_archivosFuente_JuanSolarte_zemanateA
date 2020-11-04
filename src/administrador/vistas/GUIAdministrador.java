@@ -1,7 +1,8 @@
 package administrador.vistas;
 
 import administrador.sop_rmi.GestionFacturasImpl;
-import servidorDeNotificaciones.vistas.*;
+import administrador.sop_rmi.GestionFacturasInt;
+import administrador.utilidades.UtilidadesRegistroA;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,10 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import servidorDeNotificaciones.sop_rmi.NotificacionImpl;
-import servidorDePedidos.dto.DatosEmpresas;
 import servidorDePedidos.sop_rmi.GestionPedidosInt;
-import servidorDeNotificaciones.utilidades.UtilidadesRegistroS;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -42,7 +40,7 @@ public class GUIAdministrador extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    GestionPedidosInt nuevoUsuario;
+    private GestionPedidosInt admin;
     private JPanel jpanelconexion;
     private JLabel jlabelservidor;
     private JTextField jtextfieldservidor;
@@ -184,18 +182,20 @@ public class GUIAdministrador extends javax.swing.JFrame {
 
     private void jButtonConecActionPerformed(ActionEvent evt) throws RemoteException {
         boolean bandera = false;
-        DatosEmpresas objEmpresa;
         jpanelconexion.setVisible(false);
         javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido NOTIFICACIONES");
-        vistaAdmin objNotificar = new vistaAdmin();
-        GestionFacturasImpl objRemotoNotificaciones = new GestionFacturasImpl(objNotificar);
+        vistaAdmin objAdmin = new vistaAdmin();
+        GestionFacturasImpl objRemotoNotificaciones;
 
         try {
-            UtilidadesRegistroS.arrancarNS(Integer.parseInt(jtextfieldpuerto.getText()));
-            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoNotificaciones, jtextfieldservidor.getText(), Integer.parseInt(jtextfieldpuerto.getText()), "ObjetoRemotoNotificaciones");
 
+            admin = (GestionPedidosInt) UtilidadesRegistroA.obtenerObjRemoto(jtextfieldservidor.getText(), Integer.parseInt(jtextfieldpuerto.getText()), "ObjetoPedidos");
+            objRemotoNotificaciones = new GestionFacturasImpl(objAdmin);
+            objAdmin.setObjGesFactura(objRemotoNotificaciones);
             this.setVisible(false);
-            objNotificar.setVisible(true);
+            admin.registrarAdmin(objRemotoNotificaciones);
+            objAdmin.llenarTabla();
+            objAdmin.setVisible(true);
         } catch (Exception e) {
             System.out.println("No se pudo realizar la conexion...");
             System.out.println(e.getMessage());

@@ -5,6 +5,7 @@
  */
 package servidorDePedidos.sop_rmi;
 
+import administrador.sop_rmi.GestionFacturasInt;
 import servidorDePedidos.dto.DatosEmpresas;
 import servidorDePedidos.dto.Pedido;
 import servidorDePedidos.dto.Factura;
@@ -21,5 +22,8 @@ public interface GestionPedidosInt extends Remote {
 
     public DatosEmpresas enviarDatosEmpresa() throws RemoteException;
 
+    public boolean  registrarAdmin(GestionFacturasInt admin) throws RemoteException ;
+    
     public boolean registrarFacturaSistema(Factura objFactura) throws RemoteException;
+
 }

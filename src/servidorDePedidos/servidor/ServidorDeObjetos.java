@@ -5,6 +5,7 @@
  */
 package servidorDePedidos.servidor;
 
+import administrador.sop_rmi.GestionFacturasImpl;
 import servidorDePedidos.utilidades.UtilidadesConsola;
 import servidorDePedidos.utilidades.UtilidadesRegistroS;
 import java.rmi.RemoteException;
@@ -31,6 +32,7 @@ public class ServidorDeObjetos {
         try {
             UtilidadesRegistroS.arrancarNS(numPuertoNS);
             UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoPedidos, direccionIpNS, numPuertoNS, "ObjetoPedidos");
+            
         } catch (Exception e) {
             System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto" + e.getMessage());
         }

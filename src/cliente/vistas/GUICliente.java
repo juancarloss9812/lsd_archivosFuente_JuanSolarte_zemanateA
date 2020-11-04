@@ -43,24 +43,12 @@ public class GUICliente extends javax.swing.JFrame {
     GestionPedidosInt nuevoUsuario;
     private JPanel jpanelconexion;
     private JLabel jlabelcliente;
-    private JLabel jlabelclienteChat;
-    private JLabel jlabelclienteNombre;
     private JLabel jlabelservidor;
     private JTextField jtextfieldservidor;
-    private JPanel jpanelchat;
     private JTextField jtextfieldpuerto;
-    private JTextArea jtextareamsg;
-    private JTextArea jtextareacontacto;
-    private JTextArea jtextareachat;
-    private JScrollPane jscrollpane1contacto;
-    private JScrollPane jscrollpane1chat;
-    private JScrollPane jscrollpane1msg;
-    private JButton jbuttonsalir;
-    private JButton jbuttonenviar;
     private JButton jbuttonconec;
     private JTextField jtextfieldcliente;
     private JLabel jlabelpuerto;
-    private JButton jButton1;
     String nombre;
 
     int opin = 0;

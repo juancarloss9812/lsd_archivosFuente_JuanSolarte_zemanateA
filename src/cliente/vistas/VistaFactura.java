@@ -36,10 +36,10 @@ public class VistaFactura extends javax.swing.JInternalFrame {
             prmVista.getObjPedido().getListaHamburguesas().clear();
             prmVista.getObjPedido().setMonto(0);
             prmVista.getObjPedido().setIVA(0);
-
+            this.show();
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "NO HAY HAMBURGUESA REGISTRADAS.");
-
+            this.dispose();
         }
     }
 

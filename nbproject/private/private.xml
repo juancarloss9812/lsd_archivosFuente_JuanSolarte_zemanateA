@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/servidorDePedidos/dto/Factura.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/administrador/sop_rmi/GestionFacturasImpl.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/servidorDePedidos/DAO/Ficheros.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/cliente/vistas/vistaCliente.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/servidorDePedidos/sop_rmi/GestionPedidosInt.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/administrador/vistas/vistaAdmin.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/servidorDePedidos/sop_rmi/GestionPedidosImpl.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/administrador/sop_rmi/GestionFacturasInt.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/cliente/vistas/VistaFactura.java</file>
+            <file>file:/D:/Ingenieria%20de%20Sistemas/VII%20SEMESTRE/Lab%20Sistemas%20Distribuidos/sd_rmi_archivos_fuente_SolarteJ_ZemanateA/src/cliente/vistas/GUICliente.java</file>
+        </group>
     </open-files>
 </project-private>

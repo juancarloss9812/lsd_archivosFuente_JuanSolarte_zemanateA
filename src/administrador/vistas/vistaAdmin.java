@@ -5,17 +5,50 @@
  */
 package administrador.vistas;
 
+import administrador.sop_rmi.GestionFacturasInt;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author JUAN
  */
 public class vistaAdmin extends javax.swing.JFrame {
 
+    ArrayList<String> nombresFacturas;
+    GestionFacturasInt objGesFactura;
+
     /**
      * Creates new form vistaAdmin
      */
     public vistaAdmin() {
         initComponents();
+    }
+
+    public void setObjGesFactura(GestionFacturasInt objGesFactura) {
+        this.objGesFactura = objGesFactura;
+    }
+
+    public void notificar() throws RemoteException{
+        javax.swing.JOptionPane.showMessageDialog(this, "ATENCION: SE AH REGISTRADO UN NUEVO PEDIDO.");
+        llenarTabla();
+    }
+    public void llenarTabla() throws RemoteException {
+        
+        nombresFacturas = objGesFactura.enviarNombreFacturas();
+        String Matriz[][] = new String [nombresFacturas.size()][1];
+        for (int i = 0; i < nombresFacturas.size(); i++) {
+            Matriz[i][0]=nombresFacturas.get(i);
+        }
+        tblNomFactura.setModel(new javax.swing.table.DefaultTableModel(
+            Matriz,
+            new String [] {
+                "Facturas"
+            }
+        ));
+
     }
 
     /**
@@ -27,23 +60,89 @@ public class vistaAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblNomFactura = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtFacturaInfo = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tblNomFactura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Facturas"
+            }
+        ));
+        tblNomFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNomFacturaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblNomFactura);
+
+        txtFacturaInfo.setColumns(20);
+        txtFacturaInfo.setRows(5);
+        jScrollPane2.setViewportView(txtFacturaInfo);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setText("GESTOR FACTURAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(111, 111, 111))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblNomFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNomFacturaMouseClicked
+        String txt;
+        int seleccion =tblNomFactura.rowAtPoint(evt.getPoint());
+        try {
+            txt = objGesFactura.darFactura(""+tblNomFactura.getValueAt(seleccion, 0));
+            txtFacturaInfo.setText(txt);
+        } catch (RemoteException ex) {
+            Logger.getLogger(vistaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+    }//GEN-LAST:event_tblNomFacturaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblNomFactura;
+    private javax.swing.JTextArea txtFacturaInfo;
     // End of variables declaration//GEN-END:variables
 }

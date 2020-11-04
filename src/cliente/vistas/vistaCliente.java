@@ -232,7 +232,6 @@ public class vistaCliente extends javax.swing.JFrame {
         try {
             objVFactura = new VistaFactura(this);
             escritorio.add(objVFactura);
-            objVFactura.show();
         } catch (RemoteException ex) {
             Logger.getLogger(vistaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

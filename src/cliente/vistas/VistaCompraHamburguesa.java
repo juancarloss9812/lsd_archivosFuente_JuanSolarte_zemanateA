@@ -259,8 +259,6 @@ public class VistaCompraHamburguesa extends javax.swing.JInternalFrame {
         if (c < '0' || c > '9') {
             evt.consume();
         }
-
-
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

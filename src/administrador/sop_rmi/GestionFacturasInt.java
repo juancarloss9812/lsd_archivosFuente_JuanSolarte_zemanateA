@@ -6,12 +6,14 @@
 package administrador.sop_rmi;
 
 import java.rmi.Remote;
-
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 /**
  *
  * @author JUAN
  */
 public interface GestionFacturasInt extends Remote{
-    public void NotificarFactura(String nombreFactura);
-    
+    public void NotificarFactura() throws RemoteException;
+    public ArrayList<String> enviarNombreFacturas() throws RemoteException;
+    public String darFactura(String nombre) throws RemoteException;
 }
